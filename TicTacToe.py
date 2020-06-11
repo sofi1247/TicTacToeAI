@@ -19,7 +19,7 @@ class TicTacToe:
 
     def print_state(self):
         print("Turn: " + str(self.turn_counter))
-        print("Whose turn: " + self.curr_player)
+        print("Whose turn: " + self.curr_player.name)
 
         for i in range(0,3):
             for j in range(0,3):
@@ -28,8 +28,8 @@ class TicTacToe:
             print()
 
     def game_loop(self):
-        row_num = int(input("Row number: "))
-        col_num = int(input("Column number: "))
+
+        row_num, col_num = self.curr_player.make_move(self.board)
 
         if self.board[row_num][col_num] == "n":
             if self.curr_player == self.player1:
