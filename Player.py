@@ -8,8 +8,10 @@ class Player(ABC):
 
 class Human(Player):
 
-    def __init__(self):
+    def __init__(self, piece):
         self.name = input("Enter your name please: ")
+        self.my_piece = piece
+
 
     def make_move(self, board):
 

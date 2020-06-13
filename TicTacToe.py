@@ -3,6 +3,7 @@ class TicTacToe:
     def __init__(self, player1, player2):
         self.turn_counter = 0
         self.curr_player = player1
+        self.went_first = player1
         self.player1 = player1
         self.player2 = player2
         self.score_player1 = 0
@@ -15,7 +16,12 @@ class TicTacToe:
     def reset_game(self):
         self.turn_counter = 0
         self.board = [["n", "n", "n"], ["n", "n", "n"], ["n", "n", "n"]]
-        self.curr_player = self.player1
+        if self.went_first == self.player1:
+            self.curr_player = self.player2
+            self.went_first = self.player2
+        else:
+            self.curr_player = self.player1
+            self.went_first = self.player1
 
     def print_state(self):
         print("Turn: " + str(self.turn_counter))
@@ -33,10 +39,10 @@ class TicTacToe:
 
         if self.board[row_num][col_num] == "n":
             if self.curr_player == self.player1:
-                self.board[row_num][col_num] = "x"
+                self.board[row_num][col_num] = self.piece_x
                 self.curr_player = self.player2
             else:
-                self.board[row_num][col_num] = "o"
+                self.board[row_num][col_num] = self.piece_o
                 self.curr_player = self.player1
         else:
             print("This tile is already filled. Please choose another one.")
@@ -79,9 +85,9 @@ class TicTacToe:
         else:
             return "continue"
 
-        if win_piece == "x":
+        if win_piece == self.piece_x:
             return self.player1
-        elif win_piece == "o":
+        elif win_piece == self.piece_o:
             return self.player2
 
 
