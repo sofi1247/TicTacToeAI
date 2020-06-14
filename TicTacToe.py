@@ -48,14 +48,17 @@ class TicTacToe:
             print("This tile is already filled. Please choose another one.")
 
         self.turn_counter += 1
-        self.win_check()
+        winner = self.win_check()
 
-        if self.win_check() == "continue":
-            self.print_state()
-            self.game_loop()
+        if winner == "none":
+            if self.turn_counter == 9:
+                print("Game is a draw")
+            else:
+                self.print_state()
+                self.game_loop()
         else:
             self.print_state()
-            print("The winner is " + self.win_check())
+            print("The winner is " + winner.name)
 
     def win_check(self):
         # checking first row
@@ -65,7 +68,7 @@ class TicTacToe:
         elif self.board[1][0] == self.board[1][1] == self.board[1][2] and self.board[1][0] != "n":
             win_piece = self.board[1][0]
         # checking third row
-        elif self.board[2][0] == self.board[0][1] == self.board[0][2] and self.board[2][0] != "n":
+        elif self.board[2][0] == self.board[2][1] == self.board[2][2] and self.board[2][0] != "n":
             win_piece = self.board[2][0]
         # checking first column
         elif self.board[0][0] == self.board[1][0] == self.board[2][0] and self.board[0][0] != "n":
@@ -74,7 +77,7 @@ class TicTacToe:
         elif self.board[0][1] == self.board[1][1] == self.board[2][1] and self.board[0][1] != "n":
             win_piece = self.board[0][1]
         # checking third column
-        elif self.board[0][2] == self.board[2][1] == self.board[2][2] and self.board[0][2] != "n":
+        elif self.board[0][2] == self.board[1][2] == self.board[2][2] and self.board[0][2] != "n":
             win_piece = self.board[0][2]
         # checking left diagonal
         elif self.board[0][0] == self.board[1][1] == self.board[2][2] and self.board[0][0] != "n":
@@ -83,7 +86,7 @@ class TicTacToe:
         elif self.board[0][2] == self.board[1][1] == self.board[2][0] and self.board[1][1] != "n":
             win_piece = self.board[1][1]
         else:
-            return "continue"
+            return "none"
 
         if win_piece == self.piece_x:
             return self.player1
